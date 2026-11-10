@@ -2,8 +2,8 @@
 module conv #(
         parameter int WIDTH = 16,
         
-        parameter int IMAGE_X = 28,
-        parameter int IMAGE_Y = 28,
+        parameter int IMAGE_X = 4,
+        parameter int IMAGE_Y = 4,
         
         parameter int KERNAL = 3,
         parameter int FRAC_BITS = 14,
@@ -11,9 +11,9 @@ module conv #(
         parameter BIAS_FILE = "conv1_bias.mem",
         
         parameter int OUTPUT_CHANNEL = 12,
-        parameter int INPUT_CHANNEL = 1,
+        parameter int INPUT_CHANNEL = 1
         
-        parameter INPUT_FILE = ""
+        //parameter INPUT_FILE = ""
     )
     (
         input logic clk, reset,
@@ -23,7 +23,8 @@ module conv #(
         output logic image_ready,
         output logic signed [WIDTH-1:0] data_out,
         output logic valid_out,
-        output logic done
+        output logic done,
+        output logic signed [WIDTH-1:0] image [IMAGE_X-1:0][IMAGE_Y-1:0]
     );
         
         //Set up parameters for bringing in weights
@@ -35,7 +36,6 @@ module conv #(
         localparam int NEW_X = IMAGE_X - KERNAL + 1;
         localparam int NEW_Y = IMAGE_Y - KERNAL + 1;
     
-        logic signed [WIDTH-1:0] image [0:IMAGE_Y-1][0:IMAGE_X-1];
         logic [$clog2(IMAGE_X)-1:0] col;
         logic [$clog2(IMAGE_Y)-1:0] row;
         
@@ -74,8 +74,5 @@ module conv #(
                     col <= col + 1;
                 end
             end
-        end 
-        
-        
-        
+        end        
 endmodule
