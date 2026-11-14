@@ -19,9 +19,9 @@ module conv #(
         output logic image_ready,
         output logic signed [WIDTH-1:0] data_out,
         output logic valid_out,
-        output logic done,
-        output logic signed [WIDTH-1:0] image [0:IMAGE_Y-1][0:IMAGE_X-1]    
+        output logic done,   
     );
+        logic signed [WIDTH-1:0] image [0:IMAGE_Y-1][0:IMAGE_X-1];
         
         //Set up parameters for bringing in weights
         localparam int TAPS = KERNAL * KERNAL;
