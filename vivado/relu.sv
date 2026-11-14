@@ -6,6 +6,6 @@ module relu #(
         output logic signed [WIDTH-1:0] data_out
     );
     
-        assign data_out = data_in[WIDTH-1] ? 0 : data_in; //checks signed bit for 1 to see if less than 0
+        assign data_out = data_in[WIDTH-1] ? '0 : data_in; //checks signed bit for 1 to see if less than 0
     
 endmodule
