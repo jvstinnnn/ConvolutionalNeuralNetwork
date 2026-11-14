@@ -10,8 +10,7 @@ module imageload_tb;
     logic valid_in;
     logic signed [WIDTH-1:0] data_in;
     logic image_ready;
-    logic signed [WIDTH-1:0] image [0:IMAGE_X-1][0:IMAGE_Y-1];
-
+    logic signed [WIDTH-1:0] data_out;
 
     // 10 ns clock period
     always #5 clk = ~clk;
@@ -19,14 +18,17 @@ module imageload_tb;
     conv #(
         .WIDTH(WIDTH),
         .IMAGE_X(IMAGE_X),
-        .IMAGE_Y(IMAGE_Y)
+        .IMAGE_Y(IMAGE_Y),
+        .OUTPUT_CHANNEL(1),
+        .WEIGHT_FILE("test weights.txt"),
+        .BIAS_FILE("test bias.txt")
     ) dut (
         .clk(clk),
         .reset(reset),
         .valid_in(valid_in),
         .data_in(data_in),
         .image_ready(image_ready),
-        .image(image)
+        .data_out(data_out)
     );
 
     initial begin
@@ -66,8 +68,7 @@ module imageload_tb;
             end
         end
 
-        $display("PASS: All 784 pixels loaded correctly!");
+        $display("PASS: All 16 pixels loaded correctly!");
         $finish;
     end
-
 endmodule
